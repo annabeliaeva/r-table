@@ -10,6 +10,7 @@ import {
   Row,
   useReactTable
 } from '@tanstack/react-table'
+import { BiSortAlt2, BiSortDown, BiSortUp } from 'react-icons/bi'
 
 const columnHelper = createColumnHelper<User>()
 
@@ -76,9 +77,14 @@ function App() {
                         header.column.columnDef.header,
                         header.getContext()
                       )}
-                  <span className="sort-icon">
-                    {header.column.getCanSort() ? ' ⬍' : ' '}
-                  </span>
+                  {header.column.getCanSort() &&
+                    (header.column.getIsSorted() === 'desc' ? (
+                      <BiSortUp />
+                    ) : header.column.getIsSorted() === 'asc' ? (
+                      <BiSortDown />
+                    ) : (
+                      <BiSortAlt2 />
+                    ))}
                 </th>
               ))}
             </tr>
